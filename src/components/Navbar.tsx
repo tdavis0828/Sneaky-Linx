@@ -8,6 +8,9 @@ const StyledNav = styled.nav`
   width: 100%;
   position: fixed;
   top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   & img {
     width: 275px;
     height: 90px;
