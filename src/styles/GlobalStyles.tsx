@@ -6,7 +6,7 @@ const GlobalStyles = createGlobalStyle`
         padding: 0;
         box-sizing: border-box;
         scroll-behavior: scroll;
-        position: relative;
+        font-family: 'Comfortaa', cursive;
     }
 `;
 

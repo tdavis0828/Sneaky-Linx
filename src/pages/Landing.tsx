@@ -1,20 +1,19 @@
 import React from 'react';
-import styled from 'styled-components';
+import logo from '../img/logo2.png';
+import { StyledLanding } from '../styles/Stylesheet';
 
-const StyledLanding = styled.section`
-  height: 100vh;
-  width: 100%;
-  background: url('https://images.unsplash.com/photo-1525405705122-df4e252e363f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  & p {
-    padding: 0;
-    margin: 0;
-  }
-`;
 function Landing() {
-  return <StyledLanding />;
+  return (
+    <StyledLanding>
+      <div className="overlay" />
+      <div className="header-info">
+        <img src={logo} alt="Company Logo" />
+        <button type="button">Create Account</button>
+        <p>Hook ups, relationships, FWB</p>
+        <p>We wont tell, if you wont.</p>
+      </div>
+    </StyledLanding>
+  );
 }
 
 export default Landing;
