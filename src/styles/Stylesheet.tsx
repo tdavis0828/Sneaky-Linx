@@ -52,18 +52,21 @@ export const StyledLanding = styled.section`
     justify-content: space-around;
     align-items: center;
     z-index: 9;
-    & button {
+    & a {
       background: rgba(0, 0, 0, 0.65);
       padding: 0.75rem 3rem;
       color: #fff;
       font-size: 1.15rem;
       border: none;
       border-radius: 5px;
+      text-decoration: none;
+      cursor: pointer;
       font-family: 'Comfortaa', cursive;
       transition: all 0.35s ease;
       &:hover {
         background: rgba(0, 0, 0, 0.95);
         transition: all 0.35s ease;
+        text-decoration: underline;
       }
     }
     & p {
