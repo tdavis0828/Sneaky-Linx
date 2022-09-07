@@ -91,7 +91,7 @@ export const StyledForm = styled.section`
   bottom: 0;
   z-index: 10;
   width: 85%;
-  transform: translateY(800px);
+  transform: translateY(750px);
   transition: transform 0.55s ease;
   &.open {
     transform: translateY(0);

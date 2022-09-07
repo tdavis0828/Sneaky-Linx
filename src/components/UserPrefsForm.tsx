@@ -1,13 +1,13 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import {
+  Checkbox,
   FormControlLabel,
-  FormControl,
-  FormLabel,
   Radio,
   RadioGroup,
 } from '@mui/material';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { FavoriteBorder, Favorite } from '@mui/icons-material';
 import { AppDispatch, RootState } from '../store';
 import { setIsOpen } from '../store/FormSlice';
 
@@ -17,7 +17,7 @@ function UserPrefsForm() {
     shallowEqual,
   );
   const dispatch: AppDispatch = useDispatch();
-
+  // const interests = ['Nature', 'Swimming', 'Sports'];
   return (
     <div
       className={
@@ -36,15 +36,9 @@ function UserPrefsForm() {
       </button>
       <p>Tell us about yourself</p>
       <form className="prefs">
-        <FormControl>
-          <FormLabel id="demo-radio-buttons-group-label">
-            <p>Smoke?</p>
-          </FormLabel>
-          <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue="Yes"
-            name="radio-buttons-group"
-          >
+        <div className="radio-buttons">
+          <RadioGroup defaultValue="Yes" name="radio-buttons-group">
+            Smoke?
             <FormControlLabel
               value="Yes"
               control={<Radio />}
@@ -61,14 +55,12 @@ function UserPrefsForm() {
               label="Sometimes"
             />
           </RadioGroup>
-          <FormLabel id="demo-radio-buttons-group-label">
-            <p>Drink?</p>
-          </FormLabel>
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue="Yes"
             name="radio-buttons-group"
           >
+            Drink?
             <FormControlLabel
               value="Yes"
               control={<Radio />}
@@ -85,7 +77,19 @@ function UserPrefsForm() {
               label="Sometimes"
             />
           </RadioGroup>
-        </FormControl>
+        </div>
+        <div className="interests">
+          <FormControlLabel
+            value="Nature"
+            control={
+              <Checkbox
+                icon={<FavoriteBorder />}
+                checkedIcon={<Favorite />}
+              />
+            }
+            label="Nature"
+          />
+        </div>
         <button type="submit" className="btn">
           Finish
         </button>
