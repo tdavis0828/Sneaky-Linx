@@ -1,11 +1,7 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import {
-  Checkbox,
-  FormControlLabel,
-  Radio,
-  RadioGroup,
-} from '@mui/material';
+import { Checkbox, FormControlLabel } from '@mui/material';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { FavoriteBorder, Favorite } from '@mui/icons-material';
 import { AppDispatch, RootState } from '../store';
@@ -17,7 +13,38 @@ function UserPrefsForm() {
     shallowEqual,
   );
   const dispatch: AppDispatch = useDispatch();
-  // const interests = ['Nature', 'Swimming', 'Sports'];
+  const interests: Array<string> = [
+    'Nature',
+    'Swimming',
+    'Sports',
+    'Traveling',
+    'Dancing',
+    'Cooking',
+    'Photography',
+    'Learning',
+    'Art',
+    'Music',
+    'Exercise',
+    'Animals',
+    'Cosmetics',
+    'Theatre',
+    'Food',
+    'Vlogging',
+    'Blogging',
+    'Gaming',
+    'History',
+    'Fantasy Sports',
+    'Hunting',
+    'Philathropy',
+    'Concerts',
+    'Video Games',
+    'Religion',
+    'Tattoos',
+    'Camping',
+    'Surfing',
+    'School',
+    'Fishing',
+  ];
   return (
     <div
       className={
@@ -34,61 +61,23 @@ function UserPrefsForm() {
       >
         <i className="fa-regular fa-circle-xmark close-btn" />
       </button>
-      <p>Tell us about yourself</p>
       <form className="prefs">
-        <div className="radio-buttons">
-          <RadioGroup defaultValue="Yes" name="radio-buttons-group">
-            Smoke?
-            <FormControlLabel
-              value="Yes"
-              control={<Radio />}
-              label="Yes"
-            />
-            <FormControlLabel
-              value="No"
-              control={<Radio />}
-              label="No"
-            />
-            <FormControlLabel
-              value="Sometimes"
-              control={<Radio />}
-              label="Sometimes"
-            />
-          </RadioGroup>
-          <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue="Yes"
-            name="radio-buttons-group"
-          >
-            Drink?
-            <FormControlLabel
-              value="Yes"
-              control={<Radio />}
-              label="Yes"
-            />
-            <FormControlLabel
-              value="No"
-              control={<Radio />}
-              label="No"
-            />
-            <FormControlLabel
-              value="Sometimes"
-              control={<Radio />}
-              label="Sometimes"
-            />
-          </RadioGroup>
-        </div>
+        <p>Give us a few of your interests</p>
         <div className="interests">
-          <FormControlLabel
-            value="Nature"
-            control={
-              <Checkbox
-                icon={<FavoriteBorder />}
-                checkedIcon={<Favorite />}
+          {interests.map((interest: string) => {
+            return (
+              <FormControlLabel
+                value={interest}
+                control={
+                  <Checkbox
+                    icon={<FavoriteBorder sx={{ fontSize: 18 }} />}
+                    checkedIcon={<Favorite />}
+                  />
+                }
+                label={interest}
               />
-            }
-            label="Nature"
-          />
+            );
+          })}
         </div>
         <button type="submit" className="btn">
           Finish

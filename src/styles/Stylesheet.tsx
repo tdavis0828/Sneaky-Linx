@@ -42,12 +42,16 @@ export const StyledLanding = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  & .header-info {
+  & .header {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    color: #fff;
     z-index: 9;
+    & small {
+      margin: 0.5rem;
+    }
     & button {
       background: rgba(0, 0, 0, 0.65);
       padding: 0.75rem 3rem;
@@ -59,6 +63,11 @@ export const StyledLanding = styled.section`
       font-family: 'Comfortaa', cursive;
       transition: all 0.35s ease;
       margin: 1rem;
+      &.login {
+        background: none;
+        padding: 0;
+        font-weight: 300;
+      }
       &:hover {
         background: rgba(0, 0, 0, 0.95);
         text-decoration: underline;
@@ -90,8 +99,9 @@ export const StyledForm = styled.section`
   position: absolute;
   bottom: 0;
   z-index: 10;
-  width: 85%;
-  transform: translateY(750px);
+  width: 95%;
+  height: 85vh;
+  transform: translateY(800px);
   transition: transform 0.55s ease;
   &.open {
     transform: translateY(0);
@@ -99,6 +109,7 @@ export const StyledForm = styled.section`
   }
   & div {
     display: flex;
+    width: 100%;
     &.user-pref {
       position: absolute;
       top: 0;
@@ -116,7 +127,7 @@ export const StyledForm = styled.section`
   }
   & button {
     position: absolute;
-    bottom: 10%;
+    bottom: 3%;
     width: 75%;
     height: 45px;
     font-family: 'Comfortaa', cursive;
@@ -124,17 +135,31 @@ export const StyledForm = styled.section`
     color: #fff;
     border: none;
     border-radius: 5px;
+    &.btn {
+      left: 15%;
+      }
   }
   & .form-container {
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     background: #fff;
     border-radius: 25px 25px 0 0;
-    & button {
-      &.btn {
-      left: 15%;
+    & form {
+      margin: 2rem;
+      height: 70%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      }
+    }
+    & .interests {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      & label {
+        margin: 0;
       }
     }
     & .close-btn {
@@ -146,9 +171,18 @@ export const StyledForm = styled.section`
       background: none;
       color: #000;
     }
-    &.mobile {
-    height: 80vh;
+  }
+  }
+  @media (min-width: 768px) {
+    width: 50%;
+    height: 70%;
+    bottom: 15%;
+    & .form-container {
+      border-radius: 25px;
     }
   }
+  @media (min-width: 992px) {
+    width: 35%;
+    height: 65%;
   }
 `;

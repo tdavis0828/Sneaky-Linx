@@ -17,7 +17,7 @@ function Landing() {
   return (
     <StyledLanding>
       <div className="overlay" />
-      <div className="header-info">
+      <div className="header">
         <img src={logo} alt="Company Logo" />
         <button
           type="button"
@@ -27,6 +27,9 @@ function Landing() {
         </button>
         <p>Hook ups, relationships, FWB</p>
         <p>We wont tell, if you wont.</p>
+        <button type="button" className="login">
+          Login
+        </button>
       </div>
       <StyledForm className={isOpen ? 'open' : ''}>
         <UserInfoForm />
