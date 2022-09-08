@@ -60,6 +60,8 @@ export const StyledLanding = styled.section`
       text-decoration: none;
       border: none;
       border-radius: 5px;
+      text-decoration: none;
+      cursor: pointer;
       font-family: 'Comfortaa', cursive;
       transition: all 0.35s ease;
       margin: 1rem;
@@ -72,6 +74,7 @@ export const StyledLanding = styled.section`
         background: rgba(0, 0, 0, 0.95);
         text-decoration: underline;
         transition: all 0.35s ease;
+        text-decoration: underline;
       }
     }
     & p {
