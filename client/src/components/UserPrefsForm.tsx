@@ -3,20 +3,37 @@
 import React, { useState } from 'react';
 import { Checkbox, FormControlLabel } from '@mui/material';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { Navigate } from 'react-router-dom';
+import { nanoid } from 'nanoid';
 import { FavoriteBorder, Favorite } from '@mui/icons-material';
 import { AppDispatch, RootState } from '../store';
 import { setIsOpen } from '../store/FormSlice';
 import { setInterests } from '../store/UserSlice';
+
+const axios = require('axios').default;
 
 function UserPrefsForm() {
   const { nextForm } = useSelector(
     (state: RootState) => state.form,
     shallowEqual,
   );
-  const { interests } = useSelector(
-    (state: RootState) => state.user,
-    shallowEqual,
-  );
+  // const { interests } = useSelector(
+  //   (state: RootState) => state.user,
+  //   shallowEqual,
+  // );
+  const {
+    firstName,
+    lastName,
+    gender,
+    preference,
+    username,
+    email,
+    password,
+    birthday,
+    smoker,
+    drinker,
+    interests,
+  } = useSelector((state: RootState) => state.user, shallowEqual);
   const dispatch: AppDispatch = useDispatch();
   const interestsArr: Array<string> = [
     'Nature',
@@ -52,6 +69,8 @@ function UserPrefsForm() {
   ];
 
   const [userInterest, setUserInterest] = useState<any>([]);
+  const [formComplete, setFormComplete] = useState<boolean>(false);
+  const [submissionErr, setSubmissionErr] = useState<any>('');
 
   function handleInterests(interest: any) {
     if (userInterest.includes(interest)) {
@@ -65,14 +84,49 @@ function UserPrefsForm() {
         interest,
       ]);
     }
-    dispatch(setInterests(userInterest));
   }
 
+  const newUser = {
+    userId: nanoid(),
+    firstName: firstName,
+    lastName: lastName,
+    gender: gender,
+    preference: preference,
+    username: username,
+    email: email,
+    password: password,
+    birthday: birthday,
+    smoker: smoker,
+    drinker: drinker,
+    interests: interests,
+  };
+
+  function submitNewUser() {
+    axios
+      .post('http://localhost:5000/users/addUser', newUser)
+      .then((res: any) => {
+        console.log(res.data);
+      })
+      .catch((error: any) => {
+        console.log(error);
+        setSubmissionErr(error);
+      });
+  }
   function handleSubmit(e: any) {
     e.preventDefault();
-    console.log(interests);
+    dispatch(setInterests(userInterest));
+    if (!submissionErr) {
+      setFormComplete(true);
+    }
+    submitNewUser();
   }
 
+  // const getData = async () => {
+  //   const res = await fetch('/users');
+  //   const data = await res.json();
+  //   console.log(data);
+  // };
+  // getData();
   return (
     <div
       className={
@@ -90,6 +144,7 @@ function UserPrefsForm() {
         <i className="fa-regular fa-circle-xmark close-btn" />
       </button>
       <form className="prefs" onSubmit={handleSubmit}>
+        {formComplete && <Navigate to="/dashboard" />}
         <p>Give us a few of your interests</p>
         <div className="interests">
           {interestsArr.map((interest: string) => {

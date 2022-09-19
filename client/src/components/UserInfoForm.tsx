@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import {
   FormControl,
@@ -16,6 +16,7 @@ import {
   setLastName,
   setEmail,
   setUsername,
+  setBirthday,
   setPassword,
   setSmoker,
   setDrinker,
@@ -24,36 +25,41 @@ import {
 function UserInfoForm() {
   const dispatch: AppDispatch = useDispatch();
   const {
-    gender,
-    preference,
     firstName,
     lastName,
-    email,
+    gender,
+    preference,
     username,
+    email,
     password,
     smoker,
     drinker,
   } = useSelector((state: RootState) => state.user, shallowEqual);
   function handleSubmit(e: { preventDefault: () => void }) {
     e.preventDefault();
-    console.log(
-      gender,
-      preference,
-      firstName,
-      lastName,
-      email,
-      username,
-      password,
-      smoker,
-      drinker,
-    );
   }
-  // const getData = async () => {
-  //   const res = await fetch('/users');
-  //   const data = await res.json();
-  //   console.log(data);
-  // };
-  // getData();
+  const [bdayMonth, setBdayMonth] = useState<string>();
+  const [bdayDay, setBdayDay] = useState<string>();
+  const [bdayYear, setBdayYear] = useState<string>();
+  const formattedBirthday = `${bdayMonth}/${bdayDay}/${bdayYear}`;
+  function validateForm() {
+    if (
+      gender &&
+      preference &&
+      firstName &&
+      lastName &&
+      email &&
+      password &&
+      smoker &&
+      drinker
+    ) {
+      console.log('valid');
+      dispatch(setNextForm(true));
+      dispatch(setBirthday(formattedBirthday));
+    } else {
+      console.log('Invalid');
+    }
+  }
   return (
     <div className="form-container" id="user-info">
       <button
@@ -134,6 +140,7 @@ function UserInfoForm() {
               label="Month"
               variant="standard"
               required
+              onChange={(e) => setBdayMonth(e.target.value)}
             />
           </FormControl>
           <FormControl sx={{ m: 1, maxWidth: 70 }}>
@@ -142,6 +149,7 @@ function UserInfoForm() {
               label="Day"
               variant="standard"
               required
+              onChange={(e) => setBdayDay(e.target.value)}
             />
           </FormControl>
           <FormControl sx={{ m: 1, maxWidth: 100 }}>
@@ -150,6 +158,7 @@ function UserInfoForm() {
               label="Year"
               variant="standard"
               required
+              onChange={(e) => setBdayYear(e.target.value)}
             />
           </FormControl>
         </div>
@@ -227,18 +236,8 @@ function UserInfoForm() {
 
         <button
           type="submit"
-          onClick={() => dispatch(setNextForm(true))}
+          onClick={() => validateForm()}
           className="btn"
-          // disabled={
-          //   !gender ||
-          //   !preference ||
-          //   !firstName ||
-          //   !lastName ||
-          //   !email ||
-          //   !password ||
-          //   !smoker ||
-          //   !drinker
-          // }
         >
           Next
         </button>
