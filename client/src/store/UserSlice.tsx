@@ -6,6 +6,7 @@ const initialState = {
   gender: '',
   firstName: '',
   lastName: '',
+  images: '',
   preference: '',
   username: '',
   email: '',
@@ -20,6 +21,7 @@ const initialState = {
   smoker: '',
   drinker: '',
   interests: [],
+  isLoggedIn: false,
 } as UserState;
 
 export const userSlice = createSlice({
@@ -37,6 +39,9 @@ export const userSlice = createSlice({
     },
     setLastName(state, { payload }) {
       state.lastName = payload;
+    },
+    setImages(state, { payload }) {
+      state.images = payload;
     },
     setPreference(state, { payload }) {
       state.preference = payload;
@@ -80,6 +85,9 @@ export const userSlice = createSlice({
     setInterests(state, { payload }) {
       state.interests = payload;
     },
+    setIsLoggedIn(state, { payload }) {
+      state.isLoggedIn = payload;
+    },
   },
 });
 
@@ -88,6 +96,7 @@ export const {
   setGender,
   setFirstName,
   setLastName,
+  setImages,
   setPreference,
   setUsername,
   setEmail,
@@ -102,5 +111,6 @@ export const {
   setSmoker,
   setDrinker,
   setInterests,
+  setIsLoggedIn,
 } = userSlice.actions;
 export default userSlice.reducer;

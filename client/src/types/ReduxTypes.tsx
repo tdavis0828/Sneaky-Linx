@@ -11,6 +11,7 @@ export type UserState = {
   gender: string;
   firstName: string;
   lastName: string;
+  images: string;
   preference: string;
   username: string;
   email: string;
@@ -25,4 +26,5 @@ export type UserState = {
   smoker: string;
   drinker: string;
   interests: string[];
+  isLoggedIn: boolean;
 };

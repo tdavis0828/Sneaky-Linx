@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import {
   FormControl,
@@ -20,13 +20,16 @@ import {
   setPassword,
   setSmoker,
   setDrinker,
+  setImages,
 } from '../store/UserSlice';
+import defaultUserIcon from '../img/default-user-icon.png';
 
 function UserInfoForm() {
   const dispatch: AppDispatch = useDispatch();
   const {
     firstName,
     lastName,
+    images,
     gender,
     preference,
     username,
@@ -60,6 +63,14 @@ function UserInfoForm() {
       console.log('Invalid');
     }
   }
+
+  const handleImageChange = (e: any) => {
+    dispatch(setImages(URL.createObjectURL(e.target.files[0])));
+  };
+  useEffect(() => {
+    console.log(images);
+  }, [images]);
+
   return (
     <div className="form-container" id="user-info">
       <button
@@ -70,7 +81,13 @@ function UserInfoForm() {
         <i className="fa-regular fa-circle-xmark close-btn" />
       </button>
       <p>Lets get started</p>
+      <div className="user-img">
+        <img src={!images ? defaultUserIcon : images} alt="profile" />
+      </div>
       <form onSubmit={handleSubmit}>
+        <div className="user-img">
+          <input type="file" onChange={handleImageChange} />
+        </div>
         <div>
           <FormControl
             variant="standard"
@@ -234,11 +251,7 @@ function UserInfoForm() {
           </FormControl>
         </div>
 
-        <button
-          type="submit"
-          onClick={() => validateForm()}
-          className="btn"
-        >
+        <button type="submit" onClick={validateForm} className="btn">
           Next
         </button>
       </form>
