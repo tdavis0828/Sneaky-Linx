@@ -21,7 +21,7 @@ const initialState = {
   smoker: '',
   drinker: '',
   interests: [],
-  isLoggedIn: false,
+  isLoggedIn: true,
 } as UserState;
 
 export const userSlice = createSlice({

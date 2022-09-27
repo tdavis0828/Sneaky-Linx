@@ -44,6 +44,8 @@ function UserInfoForm() {
   const [bdayMonth, setBdayMonth] = useState<string>();
   const [bdayDay, setBdayDay] = useState<string>();
   const [bdayYear, setBdayYear] = useState<string>();
+  const [imageDisplay, setImageDisplay] = useState<any>();
+
   const formattedBirthday = `${bdayMonth}/${bdayDay}/${bdayYear}`;
   function validateForm() {
     if (
@@ -65,7 +67,15 @@ function UserInfoForm() {
   }
 
   const handleImageChange = (e: any) => {
-    dispatch(setImages(URL.createObjectURL(e.target.files[0])));
+    setImageDisplay(URL.createObjectURL(e.target.files[0]));
+    // const formData = new FormData();
+    // formData.append(
+    //   'user-image',
+    //   e.target.files[0],
+    //   e.target.files[0].name,
+    // );
+    // console.log(formData);
+    dispatch(setImages(e.target.files[0]));
   };
   useEffect(() => {
     console.log(images);
@@ -82,7 +92,10 @@ function UserInfoForm() {
       </button>
       <p>Lets get started</p>
       <div className="user-img">
-        <img src={!images ? defaultUserIcon : images} alt="profile" />
+        <img
+          src={!images ? defaultUserIcon : imageDisplay}
+          alt="profile"
+        />
       </div>
       <form onSubmit={handleSubmit}>
         <div className="user-img">
@@ -103,7 +116,6 @@ function UserInfoForm() {
             >
               <MenuItem value="Man">Man</MenuItem>
               <MenuItem value="Woman">Woman</MenuItem>
-              <MenuItem value="Other">Somewhere in between</MenuItem>
             </Select>
           </FormControl>
           <FormControl
@@ -124,7 +136,6 @@ function UserInfoForm() {
             >
               <MenuItem value="Man">Man</MenuItem>
               <MenuItem value="Woman">Woman</MenuItem>
-              <MenuItem value="Other">Somewhere in between</MenuItem>
             </Select>
           </FormControl>
         </div>
