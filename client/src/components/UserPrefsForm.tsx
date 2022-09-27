@@ -104,7 +104,11 @@ function UserPrefsForm() {
 
   function submitNewUser() {
     axios
-      .post('http://localhost:5000/users/addUser', newUser)
+      .post('http://localhost:5000/users/addUser', newUser, {
+        headers: {
+          'content-type': 'multipart/form-data',
+        },
+      })
       .then((res: any) => {
         console.log(res.data);
       })
@@ -152,6 +156,7 @@ function UserPrefsForm() {
                     onClick={() => handleInterests(interest)}
                   />
                 }
+                key={nanoid()}
                 label={interest}
               />
             );

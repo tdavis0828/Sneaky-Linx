@@ -35,7 +35,7 @@ function Dashboard() {
       {userData.length && (
         <ProfileCard
           username={username}
-          getNewUser={() => getNewUser}
+          getNewUser={getNewUser}
           interests1={interests}
         />
       )}

@@ -11,7 +11,7 @@ export type UserState = {
   gender: string;
   firstName: string;
   lastName: string;
-  images: string;
+  images: {};
   preference: string;
   username: string;
   email: string;

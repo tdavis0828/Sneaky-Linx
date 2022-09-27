@@ -38,9 +38,9 @@ function UserInfoForm() {
     smoker,
     drinker,
   } = useSelector((state: RootState) => state.user, shallowEqual);
-  function handleSubmit(e: { preventDefault: () => void }) {
-    e.preventDefault();
-  }
+  // function handleSubmit(e: { preventDefault: () => void }) {
+  //   e.preventDefault();
+  // }
   const [bdayMonth, setBdayMonth] = useState<string>();
   const [bdayDay, setBdayDay] = useState<string>();
   const [bdayYear, setBdayYear] = useState<string>();
@@ -68,13 +68,6 @@ function UserInfoForm() {
 
   const handleImageChange = (e: any) => {
     setImageDisplay(URL.createObjectURL(e.target.files[0]));
-    // const formData = new FormData();
-    // formData.append(
-    //   'user-image',
-    //   e.target.files[0],
-    //   e.target.files[0].name,
-    // );
-    // console.log(formData);
     dispatch(setImages(e.target.files[0]));
   };
   useEffect(() => {
@@ -97,9 +90,13 @@ function UserInfoForm() {
           alt="profile"
         />
       </div>
-      <form onSubmit={handleSubmit}>
+      <form>
         <div className="user-img">
-          <input type="file" onChange={handleImageChange} />
+          <input
+            type="file"
+            name="images"
+            onChange={handleImageChange}
+          />
         </div>
         <div>
           <FormControl
@@ -262,7 +259,7 @@ function UserInfoForm() {
           </FormControl>
         </div>
 
-        <button type="submit" onClick={validateForm} className="btn">
+        <button type="button" onClick={validateForm} className="btn">
           Next
         </button>
       </form>

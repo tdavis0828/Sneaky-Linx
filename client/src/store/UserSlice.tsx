@@ -6,7 +6,7 @@ const initialState = {
   gender: '',
   firstName: '',
   lastName: '',
-  images: '',
+  images: {},
   preference: '',
   username: '',
   email: '',
@@ -21,7 +21,7 @@ const initialState = {
   smoker: '',
   drinker: '',
   interests: [],
-  isLoggedIn: true,
+  isLoggedIn: false,
 } as UserState;
 
 export const userSlice = createSlice({
