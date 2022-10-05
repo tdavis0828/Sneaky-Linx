@@ -8,6 +8,7 @@ const GlobalStyles = createGlobalStyle`
         scroll-behavior: scroll;
         font-family: 'Comfortaa', cursive;
         overflow: hidden;
+        background: #171717;
     }
 `;
 

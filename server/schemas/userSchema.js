@@ -23,6 +23,10 @@ const userSchema = new Schema({
     required: true,
     trim: true,
   },
+  images: {
+    type: String,
+    trim: true,
+  },
   gender: {
     type: String,
     trim: true,
@@ -72,6 +76,9 @@ const userSchema = new Schema({
       type: String,
     },
   ],
+  isLoggedIn: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model('User', userSchema);

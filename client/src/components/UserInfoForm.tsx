@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import {
   FormControl,
@@ -20,13 +20,16 @@ import {
   setPassword,
   setSmoker,
   setDrinker,
+  setImages,
 } from '../store/UserSlice';
+import defaultUserIcon from '../img/default-user-icon.png';
 
 function UserInfoForm() {
   const dispatch: AppDispatch = useDispatch();
   const {
     firstName,
     lastName,
+    images,
     gender,
     preference,
     username,
@@ -35,12 +38,14 @@ function UserInfoForm() {
     smoker,
     drinker,
   } = useSelector((state: RootState) => state.user, shallowEqual);
-  function handleSubmit(e: { preventDefault: () => void }) {
-    e.preventDefault();
-  }
+  // function handleSubmit(e: { preventDefault: () => void }) {
+  //   e.preventDefault();
+  // }
   const [bdayMonth, setBdayMonth] = useState<string>();
   const [bdayDay, setBdayDay] = useState<string>();
   const [bdayYear, setBdayYear] = useState<string>();
+  const [imageDisplay, setImageDisplay] = useState<any>();
+
   const formattedBirthday = `${bdayMonth}/${bdayDay}/${bdayYear}`;
   function validateForm() {
     if (
@@ -60,6 +65,15 @@ function UserInfoForm() {
       console.log('Invalid');
     }
   }
+
+  const handleImageChange = (e: any) => {
+    setImageDisplay(URL.createObjectURL(e.target.files[0]));
+    dispatch(setImages(e.target.files[0]));
+  };
+  useEffect(() => {
+    console.log(images);
+  }, [images]);
+
   return (
     <div className="form-container" id="user-info">
       <button
@@ -70,7 +84,20 @@ function UserInfoForm() {
         <i className="fa-regular fa-circle-xmark close-btn" />
       </button>
       <p>Lets get started</p>
-      <form onSubmit={handleSubmit}>
+      <div className="user-img">
+        <img
+          src={!images ? defaultUserIcon : imageDisplay}
+          alt="profile"
+        />
+      </div>
+      <form>
+        <div className="user-img">
+          <input
+            type="file"
+            name="images"
+            onChange={handleImageChange}
+          />
+        </div>
         <div>
           <FormControl
             variant="standard"
@@ -86,7 +113,6 @@ function UserInfoForm() {
             >
               <MenuItem value="Man">Man</MenuItem>
               <MenuItem value="Woman">Woman</MenuItem>
-              <MenuItem value="Other">Somewhere in between</MenuItem>
             </Select>
           </FormControl>
           <FormControl
@@ -107,7 +133,6 @@ function UserInfoForm() {
             >
               <MenuItem value="Man">Man</MenuItem>
               <MenuItem value="Woman">Woman</MenuItem>
-              <MenuItem value="Other">Somewhere in between</MenuItem>
             </Select>
           </FormControl>
         </div>
@@ -234,11 +259,7 @@ function UserInfoForm() {
           </FormControl>
         </div>
 
-        <button
-          type="submit"
-          onClick={() => validateForm()}
-          className="btn"
-        >
+        <button type="button" onClick={validateForm} className="btn">
           Next
         </button>
       </form>

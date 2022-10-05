@@ -1,23 +1,41 @@
 import styled from 'styled-components';
 
 export const StyledNav = styled.nav`
-  width: 95%;
-  height: 11vh;
+  width: 100%;
+  height: 10vh;
   display: flex;
   justify-content: space-around;
   align-items: flex-end;
-  position: fixed;
-  top: 0;
   z-index: 10;
+  color: #fff;
   & button {
+    width: 150px;
+    height: 50px;
     background: none;
     border: none;
     font-size: 1.5rem;
     margin: 1rem;
     color: #fff;
+    border: 2px solid #fff;
+    box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.55);
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+  & .navbar {
+    background: #3d0000;
+    width: 100%;
+    height: 12vh;
     position: absolute;
-    top: 0;
-    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 25px 25px 0px 0px;
+    & img {
+      width: 100px;
+      height: 100px;
+    }
   }
   & .links {
     width: 100%;
@@ -25,6 +43,8 @@ export const StyledNav = styled.nav`
     justify-content: space-around;
     align-items: center;
     font-size: 1.15rem;
+    position: absolute;
+    top: 5%;
     & a {
       color: #fff;
     }
@@ -111,6 +131,17 @@ export const StyledForm = styled.section`
   & div {
     display: flex;
     width: 100%;
+    & .user-img{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      & img {
+        height: 130px;
+        width: 130px;
+        border-radius: 50%;
+      }
+    }
+    
     &.user-pref {
       position: absolute;
       top: 0;
@@ -172,19 +203,83 @@ export const StyledForm = styled.section`
       font-size: 1.5rem;
       background: none;
       color: #000;
+      cursor: pointer;
     }
   }
   }
   @media (min-width: 768px) {
-    width: 50%;
-    height: 70%;
-    bottom: 15%;
-    & .form-container {
-      border-radius: 25px;
-    }
+    width: 60%;
+    height: 80%;
   }
   @media (min-width: 992px) {
-    width: 35%;
-    height: 65%;
+    width: 50%;
+    height: 80%;
+  }
+  @media (min-width: 1200px) {
+    width: 30%;
+  }
+`;
+
+export const StyledDashboard = styled.main`
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const StyledProfileCard = styled.section`
+  position: absolute;
+  top: 1rem;
+  height: 85vh;
+  width: 95%;
+  border-radius: 1rem;
+  color: #fff;
+  background: #323232;
+  display: flex;
+  flex-direction: column;
+  & .header {
+    font-size: 1.25rem;
+    font-weight: 300;
+    margin: 0.15rem;
+  }
+  & img {
+    width: 95%;
+    height: 28.5rem;
+    margin: 0.75rem auto;
+    border-radius: 1rem;
+  }
+  & .user-information {
+    margin: 0.25rem 0.75rem;
+    font-size: 0.85rem;
+  }
+  & .user-interests {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  & .user-interactions {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1.5rem;
+    & button {
+      border: none;
+      padding: 1rem;
+      color: #fff;
+      border-radius: 50%;
+      box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.4);
+      &:active {
+        transform: scale(0.95);
+      }
+      &.skip-btn {
+        background: #950101;
+      }
+      &.message-btn {
+        background: #3282b8;
+      }
+      &.like-btn {
+        background: #4e9f3d;
+      }
+    }
   }
 `;
