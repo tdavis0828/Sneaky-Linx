@@ -6,7 +6,7 @@ const initialState = {
   gender: '',
   firstName: '',
   lastName: '',
-  images: {},
+  images: '',
   preference: '',
   username: '',
   email: '',

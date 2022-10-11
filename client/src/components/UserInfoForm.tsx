@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import {
   FormControl,
@@ -8,7 +8,7 @@ import {
   TextField,
 } from '@mui/material';
 import { AppDispatch, RootState } from '../store';
-import { setIsOpen, setNextForm } from '../store/FormSlice';
+import { setIsValid } from '../store/FormSlice';
 import {
   setGender,
   setPreference,
@@ -38,15 +38,12 @@ function UserInfoForm() {
     smoker,
     drinker,
   } = useSelector((state: RootState) => state.user, shallowEqual);
-  // function handleSubmit(e: { preventDefault: () => void }) {
-  //   e.preventDefault();
-  // }
   const [bdayMonth, setBdayMonth] = useState<string>();
   const [bdayDay, setBdayDay] = useState<string>();
   const [bdayYear, setBdayYear] = useState<string>();
   const [imageDisplay, setImageDisplay] = useState<any>();
-
   const formattedBirthday = `${bdayMonth}/${bdayDay}/${bdayYear}`;
+
   function validateForm() {
     if (
       gender &&
@@ -59,7 +56,7 @@ function UserInfoForm() {
       drinker
     ) {
       console.log('valid');
-      dispatch(setNextForm(true));
+      dispatch(setIsValid(true));
       dispatch(setBirthday(formattedBirthday));
     } else {
       console.log('Invalid');
@@ -70,19 +67,9 @@ function UserInfoForm() {
     setImageDisplay(URL.createObjectURL(e.target.files[0]));
     dispatch(setImages(e.target.files[0]));
   };
-  useEffect(() => {
-    console.log(images);
-  }, [images]);
 
   return (
     <div className="form-container" id="user-info">
-      <button
-        type="button"
-        className="close-btn"
-        onClick={() => dispatch(setIsOpen(false))}
-      >
-        <i className="fa-regular fa-circle-xmark close-btn" />
-      </button>
       <p>Lets get started</p>
       <div className="user-img">
         <img
@@ -90,7 +77,7 @@ function UserInfoForm() {
           alt="profile"
         />
       </div>
-      <form>
+      <form encType="multipart/form-data">
         <div className="user-img">
           <input
             type="file"
@@ -113,6 +100,10 @@ function UserInfoForm() {
             >
               <MenuItem value="Man">Man</MenuItem>
               <MenuItem value="Woman">Woman</MenuItem>
+              <MenuItem value="Transgender">Transgender</MenuItem>
+              <MenuItem value="Non-binary">Non-binary</MenuItem>
+              <MenuItem value="Gender Fluid">Gender Fluid</MenuItem>
+              <MenuItem value="N/A">N/A</MenuItem>
             </Select>
           </FormControl>
           <FormControl
@@ -133,6 +124,10 @@ function UserInfoForm() {
             >
               <MenuItem value="Man">Man</MenuItem>
               <MenuItem value="Woman">Woman</MenuItem>
+              <MenuItem value="Transgender">Transgender</MenuItem>
+              <MenuItem value="Non-binary">Non-binary</MenuItem>
+              <MenuItem value="Gender Fluid">Gender Fluid</MenuItem>
+              <MenuItem value="N/A">N/A</MenuItem>
             </Select>
           </FormControl>
         </div>

@@ -5,7 +5,7 @@ const initialState = {
   userInfo: [],
   userPrefs: [],
   isOpen: false,
-  nextForm: false,
+  isValid: false,
   user: '',
 } as FormState;
 
@@ -22,12 +22,12 @@ export const formSlice = createSlice({
     setIsOpen(state, { payload }) {
       state.isOpen = payload;
     },
-    setNextForm(state, { payload }) {
-      state.nextForm = payload;
+    setIsValid(state, { payload }) {
+      state.isValid = payload;
     },
   },
 });
 
-export const { setUserInfo, setUserPrefs, setIsOpen, setNextForm } =
+export const { setUserInfo, setUserPrefs, setIsOpen, setIsValid } =
   formSlice.actions;
 export default formSlice.reducer;
