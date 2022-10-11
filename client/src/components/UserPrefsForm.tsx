@@ -7,17 +7,11 @@ import { Navigate } from 'react-router-dom';
 import { nanoid } from 'nanoid';
 import { FavoriteBorder, Favorite } from '@mui/icons-material';
 import { AppDispatch, RootState } from '../store';
-import { setIsOpen } from '../store/FormSlice';
 import { setInterests, setIsLoggedIn } from '../store/UserSlice';
 
 const axios = require('axios').default;
 
 function UserPrefsForm() {
-  const { nextForm } = useSelector(
-    (state: RootState) => state.form,
-    shallowEqual,
-  );
-
   const {
     firstName,
     lastName,
@@ -103,6 +97,7 @@ function UserPrefsForm() {
   };
 
   function submitNewUser() {
+    console.log(newUser);
     axios
       .post('http://localhost:5000/users/addUser', newUser, {
         headers: {
@@ -126,21 +121,7 @@ function UserPrefsForm() {
   }
 
   return (
-    <div
-      className={
-        nextForm
-          ? 'form-container user-pref open'
-          : 'form-container user-pref'
-      }
-      id="user-preferences"
-    >
-      <button
-        type="button"
-        className="close-btn"
-        onClick={() => dispatch(setIsOpen(false))}
-      >
-        <i className="fa-regular fa-circle-xmark close-btn" />
-      </button>
+    <div className="form-container user-pref" id="user-preferences">
       <form className="prefs" onSubmit={handleSubmit}>
         {isLoggedIn && <Navigate to="/dashboard" />}
         <p>Give us a few of your interests</p>

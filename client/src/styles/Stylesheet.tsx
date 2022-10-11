@@ -15,15 +15,15 @@ export const StyledNav = styled.nav`
     border: none;
     font-size: 1.5rem;
     margin: 1rem;
-    color: #fff;
-    border: 2px solid #fff;
+    color: #eb1d36;
+    background: #cfd2cf;
+    border: 2px solid #eb1d36;
     box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.55);
     &:active {
       transform: scale(0.98);
     }
   }
   & .navbar {
-    background: #3d0000;
     width: 100%;
     height: 12vh;
     position: absolute;
@@ -42,11 +42,68 @@ export const StyledNav = styled.nav`
     display: flex;
     justify-content: space-around;
     align-items: center;
-    font-size: 1.15rem;
+    font-size: 1.25rem;
     position: absolute;
     top: 5%;
     & a {
+      color: #eb1d36;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+`;
+
+export const StyledSignIn = styled.section`
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  .sign-in-form {
+    height: 70vh;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 15px;
+    position: absolute;
+    bottom: 25%;
+    left: 10%;
+    & a {
+      color: #eb1d36;
+    }
+    & .header {
+      font-size: 2rem;
+      margin: 0;
+    }
+  }
+  & form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    & button {
+      width: 90%;
+      height: 25%;
+      border-radius: 5px;
+      border: none;
+      background: #eb1d36;
       color: #fff;
+      font-size: 1.15rem;
+    }
+    & input {
+      background: none;
+      border: none;
+      border-bottom: 1px solid #000;
+      width: 300px;
+      height: 40px;
+      text-align: center;
+      font-size: 1.2rem;
+      margin-bottom: 3rem;
+      &:focus {
+        outline: none;
+      }
     }
   }
 `;
@@ -72,8 +129,7 @@ export const StyledLanding = styled.section`
     & small {
       margin: 0.5rem;
     }
-    & button {
-      background: rgba(0, 0, 0, 0.65);
+    & a {
       padding: 0.75rem 3rem;
       color: #fff;
       font-size: 1.15rem;
@@ -84,11 +140,6 @@ export const StyledLanding = styled.section`
       transition: all 0.35s ease;
       cursor: pointer;
       margin: 1rem;
-      &.login {
-        background: none;
-        padding: 0;
-        font-weight: 300;
-      }
       &:hover {
         background: rgba(0, 0, 0, 0.95);
         text-decoration: underline;
@@ -117,17 +168,9 @@ export const StyledLanding = styled.section`
 `;
 
 export const StyledForm = styled.section`
-  position: absolute;
-  bottom: 0;
-  z-index: 10;
-  width: 95%;
+  width: 100%;
   height: 85vh;
-  transform: translateY(800px);
-  transition: transform 0.55s ease;
-  &.open {
-    transform: translateY(0);
-    transition: transform 0.55s ease;
-  }
+  display: flex;
   & div {
     display: flex;
     width: 100%;
@@ -146,11 +189,6 @@ export const StyledForm = styled.section`
       position: absolute;
       top: 0;
       height: 100%;
-      transform: translateX(400px);
-      transition: transform 0.40s ease;
-    }
-    &.open {
-      transform: translateX(0);
       transition: transform 0.40s ease;
     }
   }
@@ -163,10 +201,11 @@ export const StyledForm = styled.section`
     width: 75%;
     height: 45px;
     font-family: 'Comfortaa', cursive;
-    background: #3282B8;
+    background: #EB1D36;
     color: #fff;
     border: none;
     border-radius: 5px;
+    font-size: 1.15rem;
     &.btn {
       left: 15%;
       cursor: pointer;
@@ -177,8 +216,8 @@ export const StyledForm = styled.section`
     height: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    background: #fff;
     border-radius: 25px 25px 0 0;
     & form {
       margin: 2rem;
@@ -234,8 +273,10 @@ export const StyledProfileCard = styled.section`
   width: 95%;
   border-radius: 1rem;
   color: #fff;
-  background: #323232;
+  background: #cfd2cf;
   display: flex;
+  border: 1px solid #eb1d36;
+  color: #000;
   flex-direction: column;
   & .header {
     font-size: 1.25rem;
@@ -243,10 +284,10 @@ export const StyledProfileCard = styled.section`
     margin: 0.15rem;
   }
   & img {
-    width: 95%;
+    width: 100%;
     height: 28.5rem;
-    margin: 0.75rem auto;
-    border-radius: 1rem;
+    margin: 0 0.5rem auto auto;
+    border-radius: 1rem 1rem 0 0;
   }
   & .user-information {
     margin: 0.25rem 0.75rem;
@@ -272,14 +313,79 @@ export const StyledProfileCard = styled.section`
         transform: scale(0.95);
       }
       &.skip-btn {
-        background: #950101;
+        background: #eb1d36;
       }
       &.message-btn {
         background: #3282b8;
+        padding: 0.85rem 4rem;
+        border-radius: 5%;
       }
       &.like-btn {
         background: #4e9f3d;
       }
     }
+  }
+`;
+
+export const StyledSearchPage = styled.main`
+  height: 80vh;
+  overflow: scroll;
+  position: relative;
+  & .search-input {
+    width: 100%;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 25px;
+    & input {
+      width: 80%;
+      height: 25px;
+      border: 1px solid #fff;
+      border-radius: 25px;
+      text-align: center;
+      font-size: 1.05rem;
+    }
+  }
+`;
+
+export const SearchCard = styled.div`
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  border: 1px solid #fff;
+  & img {
+    width: 40px;
+    height: 40px;
+    margin: 1rem;
+  }
+`;
+
+export const StyledNotiPage = styled.main`
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: scroll;
+  & p {
+    position: absolute;
+    top: 0;
+  }
+`;
+
+export const StyledNoti = styled.div`
+  width: 100%;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  margin: 0.5rem 0;
+  & small {
+    margin-left: 1rem;
+    opacity: 80%;
+    font-size: 0.75rem;
   }
 `;

@@ -2,7 +2,7 @@ export type FormState = {
   userInfo: [];
   userPrefs: [];
   isOpen: boolean;
-  nextForm: boolean;
+  isValid: boolean;
   user: any;
 };
 
@@ -27,4 +27,8 @@ export type UserState = {
   drinker: string;
   interests: string[];
   isLoggedIn: boolean;
+};
+
+export type DataState = {
+  usersData: UserState[];
 };

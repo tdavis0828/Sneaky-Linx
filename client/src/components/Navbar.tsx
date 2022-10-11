@@ -9,7 +9,7 @@ import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import { StyledNav } from '../styles/Stylesheet';
 import { RootState } from '../store';
 
-const StyledBadge = styled(Badge)(({ theme }) => ({
+export const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
     backgroundColor: '#44b700',
     color: '#44b700',
@@ -49,21 +49,31 @@ function Navbar() {
     <StyledNav>
       {isLoggedIn ? (
         <div className="navbar">
-          <SearchIcon />
-          <Badge color="success" badgeContent={messageCount}>
-            <ChatBubbleIcon />
-          </Badge>
-          <button type="button">Linx</button>
-          <Badge color="success" badgeContent={notiCount}>
-            <NotificationsIcon />
-          </Badge>
-          <StyledBadge
-            overlap="circular"
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-            variant="dot"
-          >
-            <PersonIcon />
-          </StyledBadge>
+          <NavLink to="/search">
+            <SearchIcon color="action" />
+          </NavLink>
+          <NavLink to="/inbox">
+            <Badge color="error" badgeContent={messageCount}>
+              <ChatBubbleIcon color="action" />
+            </Badge>
+          </NavLink>
+          <NavLink to="/dashboard">
+            <button type="button">Linx</button>
+          </NavLink>
+          <NavLink to="/notifications">
+            <Badge color="error" badgeContent={notiCount}>
+              <NotificationsIcon color="action" />
+            </Badge>
+          </NavLink>
+          <NavLink to="/profile">
+            <StyledBadge
+              overlap="circular"
+              anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+              variant="dot"
+            >
+              <PersonIcon color="action" />
+            </StyledBadge>
+          </NavLink>
         </div>
       ) : (
         <div className="links">

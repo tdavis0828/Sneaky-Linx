@@ -1,40 +1,32 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
-import { useSelector, useDispatch, shallowEqual } from 'react-redux';
-import { AppDispatch, RootState } from '../store';
-import { StyledForm, StyledLanding } from '../styles/Stylesheet';
-import UserInfoForm from '../components/UserInfoForm';
-import UserPrefsForm from '../components/UserPrefsForm';
-import { setIsOpen } from '../store/FormSlice';
+import React, { useCallback, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { StyledLanding } from '../styles/Stylesheet';
 import logo from '../img/logo2.png';
+import { setUsersData } from '../store/DataSlice';
 
 function Landing() {
-  const dispatch: AppDispatch = useDispatch();
-  const { isOpen, nextForm } = useSelector(
-    (state: RootState) => state.form,
-    shallowEqual,
-  );
+  const dispatch = useDispatch();
+  const getData = useCallback(async () => {
+    const res = await fetch('/users');
+    const data = await res.json();
+    dispatch(setUsersData(data));
+  }, [dispatch]);
+  useEffect(() => {
+    getData();
+  }, [getData]);
   return (
     <StyledLanding>
       <div className="overlay" />
       <div className="header">
         <img src={logo} alt="Company Logo" />
-        <button
-          type="button"
-          onClick={() => dispatch(setIsOpen(true))}
-        >
-          Create Account
-        </button>
+        <Link to="/sign-up">Create Account</Link>
         <p>Hook ups, relationships, FWB</p>
         <p>We wont tell, if you wont.</p>
-        <button type="button" className="login">
+        <Link to="/sign-in" className="sign-in">
           Login
-        </button>
+        </Link>
       </div>
-      <StyledForm className={isOpen ? 'open' : ''}>
-        <UserInfoForm />
-        {nextForm && <UserPrefsForm />}
-      </StyledForm>
     </StyledLanding>
   );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 import { Chip } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -8,44 +8,46 @@ import { StyledProfileCard } from '../styles/Stylesheet';
 
 type UserProps = {
   username: string;
-  profilePicture?: string;
-  interests1: any;
+  profilePicture?: any;
+  age: number;
+  interests: any;
   getNewUser?: () => void;
 };
 
 function ProfileCard({
   username,
-  profilePicture = '',
+  profilePicture,
+  age,
   getNewUser,
-  interests1,
+  interests,
 }: UserProps) {
-  const interests = ['Fising', 'Golfing', 'Drawing', 'Tatooos'];
   function handleLike() {
     console.log('liked');
-    console.log(interests1);
   }
   return (
     <StyledProfileCard>
       <img src={profilePicture} alt="user profile" />
       <div className="user-information">
-        <p className="header">@{username}, 32</p>
+        <p className="header">
+          @{username}, {age}
+        </p>
         <p>
           Lorem ipsum, dolor sit amet consectetur adipisicing elit.
           Obcaecati, quisquam!
         </p>
       </div>
-      <div className="user-interests">
-        {interests.map((interest: any) => {
-          return (
-            <Chip
-              label={interest}
-              color="primary"
-              size="medium"
-              key={nanoid()}
-            />
-          );
-        })}
-      </div>
+      {interests.length ? (
+        <div className="user-interests">
+          {interests.slice(-4).map((interest: any) => {
+            return (
+              <Chip label={interest} color="primary" size="medium" />
+            );
+          })}
+        </div>
+      ) : (
+        ''
+      )}
+
       <div className="user-interactions">
         <button
           type="button"
